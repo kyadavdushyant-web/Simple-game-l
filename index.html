@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Catch The Box</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{margin:0;background:#111;color:#fff;text-align:center;font-family:Arial}
+#game{height:70vh;border:2px solid #fff;position:relative}
+#box{width:60px;height:60px;background:red;position:absolute;border-radius:10px}
+button{padding:10px 20px;font-size:18px}
+</style>
+</head>
+<body>
+
+<h2>🎮 Catch The Box</h2>
+<p>Score: <span id="score">0</span></p>
+<p>Time: <span id="time">30</span></p>
+
+<div id="game">
+  <div id="box"></div>
+</div>
+
+<button onclick="start()">Start Game</button>
+
+<script>
+let score=0,time=30,interval;
+const box=document.getElementById("box");
+const game=document.getElementById("game");
+
+function move(){
+ box.style.left=Math.random()*(game.clientWidth-60)+"px";
+ box.style.top=Math.random()*(game.clientHeight-60)+"px";
+}
+
+box.onclick=()=>{score++;document.getElementById("score").innerText=score;move();}
+
+function start(){
+ score=0;time=30;
+ document.getElementById("score").innerText=0;
+ document.getElementById("time").innerText=30;
+ move();
+ clearInterval(interval);
+ interval=setInterval(()=>{
+  time--;
+  document.getElementById("time").innerText=time;
+  if(time==0){clearInterval(interval);alert("Game Over! Score: "+score);}
+ },1000);
+}
+</script>
+
+</body>
+  </html>
